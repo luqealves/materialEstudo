@@ -6,12 +6,12 @@ const setBanco = (banco) => localStorage.setItem('todoList', JSON.stringify(banc
 // CRIA UM ITEM NA TELA
 const criarItem = (tarefa, status, indice) => {
     const item = document.createElement('div');
-    item.classList.add('d-flex', 'align-items-center', 'border', 'rounded', 'p-2', 'bg-white');
+    item.classList.add('todo__item', 'align-items-center', 'border', 'rounded', 'p-2', 'bg-white');
 
     item.innerHTML = `
         <input type="checkbox" class="form-check-input me-3" ${status} data-indice="${indice}">
         <div data-indice="${indice}" class="todo__text flex-grow-1">${tarefa}</div>
-        <button class="btn btn-sm btn-outline-primary me-2 btn-editar" data-indice="${indice}">✏️</button>
+        <button class="btn btn-sm btn-outline-primary me-2 btn-editar" data-indice="${indice}" aria-label="Editar tarefa">✏️</button>
         <button class="btn btn-sm btn-outline-danger" data-indice="${indice}">x</button>
     `;
 
