@@ -9,7 +9,8 @@
         item.classList.add('todo__item'); /*METODO : CRIAR CLASSE  */
         item.innerHTML = `
                 <input type="checkbox" ${status} data-indice=${indice}>
-                <div>${tarefa}</div>
+                <div data-indice=${indice} class="todo__text">${tarefa}</div>
+                <input type="button" value="✏️" class="btn-editar" data-indice="${indice}">
                 <input type="button" value="x" data-indice=${indice}>    
                 `;
         document.getElementById('todoList').appendChild(item);
@@ -52,14 +53,21 @@
     }
     const clickItem = (evento) => { /*FUNÇÃO PARA TRATAR O CLICK NO ITEM */
         const elemento = evento.target; /*PEGA O ELEMENTO QUE FOI CLICADO */
+        const indice = elemento.dataset.indice; /*PEGA O INDICE DO ELEMENTO CLICADO */
         if (elemento.type === 'button') {
             const indice = elemento.dataset.indice; /*PEGA O INDICE DO ELEMENTO CLICADO */
             removerItem(indice); /*CHAMA A FUNÇÃO PARA REMOVER O ITEM */
         } else if (elemento.type === 'checkbox') {
             const indice = elemento.dataset.indice; /*PEGA O INDICE DO ELEMENTO CLICADO */
             atualizarItem(indice); /*CHAMA A FUNÇÃO PARA ATUALIZAR O ITEM */
-         }
-    }
+         }else if (elemento.type ==='Checkbox') {
+            const indice = elemento.dataset.indice; /*PEGA O INDICE DO ELEMENTO CLICADO */
+            atualizarItem(indice); /*CHAMA A FUNÇÃO PARA ATUALIZAR O ITEM */
+            }
+    
+
+
+
 document.getElementById('newItem').addEventListener('keypress',inserirItem);
 document.getElementById('todoList').addEventListener('click', clickItem);    
 atualizarTela(); 
