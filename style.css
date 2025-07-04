@@ -1,6 +1,8 @@
 :root {
-    --primary-color: #e8e8eb;
-    --secondary-color: #1310d6;
+  --primary-color: #e6f4ea;  /* Verde muito claro */
+  --secondary-color: #256d24; /* Verde escuro */
+  --background-gradient-start: #4ade80; /* Verde claro */
+  --background-gradient-end: #22c55e;   /* Verde vibrante */
 }
 
 * {
@@ -10,11 +12,24 @@
 }
 html {
     font-size: 62.5%;
+    margin: 0;
+    height: 100%;
 }
 
 body {
-    background-color: var(--primary-color);
-    font-family: 'Segoe UI', sans-serif;
+    background-image: url('https://wallpapercave.com/wp/wp2754871.jpg');
+  background-size: cover;       /* para a imagem cobrir toda a área */
+  background-position: center;  /* centraliza a imagem */
+  background-repeat: no-repeat; /* evita repetição da imagem */
+  min-height: 100vh;            /* garante altura mínima da tela */
+    color: white;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: 100%;
 }
 
 .todo {
@@ -108,10 +123,31 @@ body {
     font-weight: normal;
 }
 .todo__text {
-  font-size: 1.2rem;
+  font-size: 20px;
   word-break: break-word;
 }
 .todo__text.checked {
   text-decoration: line-through;
   color: gray;
+}
+.footer {
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+}
+
+.footer small {
+  display: block;
+  margin-top: 0.25rem;
+  opacity: 0.8;
+}
+
+@media (max-width: 576px) {
+  .footer {
+    font-size: 0.8rem;
+    padding: 1rem 0.5rem;
+  }
+}
+.container {
+  flex: 1;
 }

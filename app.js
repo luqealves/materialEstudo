@@ -12,7 +12,7 @@ const criarItem = (tarefa, status, indice) => {
         <input type="checkbox" class="form-check-input me-3" ${status} data-indice="${indice}">
         <div data-indice="${indice}" class="todo__text flex-grow-1">${tarefa}</div>
         <button class="btn btn-sm btn-outline-primary me-2 btn-editar" data-indice="${indice}" aria-label="Editar tarefa">✏️</button>
-        <button class="btn btn-sm btn-outline-danger" data-indice="${indice}">x</button>
+        <button class="btn btn-sm btn-outline-danger" data-indice="${indice}">❌</button>
     `;
 
     document.getElementById('todoList').appendChild(item);
@@ -35,9 +35,11 @@ const atualizarTela = () => {
 
 // INSERE NOVO ITEM
 const inserirItem = (evento) => {
+    console.log('Tecla pressionada:', evento.key);
     const tecla = evento.key;
     const texto = evento.target.value;
     if (tecla === 'Enter' && texto.trim() !== '') {
+        console.log('Inserindo item:', texto);
         const banco = getBanco();
         banco.push({ tarefa: texto, status: '' });
         setBanco(banco);
@@ -65,8 +67,11 @@ const atualizarItem = (indice) => {
 // EDITA TEXTO DA TAREFA
 const editarItem = (indice) => {
     const banco = getBanco();
+     if (!banco[indice]) return;
     const item = document.querySelectorAll('.todo__item')[indice];
     const textoAtual = banco[indice].tarefa;
+    
+    
 
     const input = document.createElement('input');
     input.type = 'text';
@@ -74,12 +79,12 @@ const editarItem = (indice) => {
     input.classList.add('form-control');
     input.style.flex = '1';
 
-    input.addEventListener('keypress', function (evento) {
-        if (evento.key === 'Enter' && this.value.trim() !== '') {
-            banco[indice].tarefa = this.value.trim();
-            setBanco(banco);
-            atualizarTela();
-        }
+    input.addEventListener('blur', function () {
+    if (this.value.trim() !== '') {
+        banco[indice].tarefa = this.value.trim();
+        setBanco(banco);
+        atualizarTela();
+    }
     });
 
     const divTexto = item.querySelector('.todo__text');
@@ -92,12 +97,10 @@ const clickItem = (evento) => {
     const elemento = evento.target;
     const indice = elemento.dataset.indice;
 
-    if (elemento.type === 'button') {
-        if (elemento.classList.contains('btn-editar')) {
-            editarItem(indice);
-        } else {
-            removerItem(indice);
-        }
+    if (elemento.classList.contains('btn-editar')) {
+        editarItem(indice);
+    } else if (elemento.tagName === 'BUTTON') {
+        removerItem(indice);
     } else if (elemento.type === 'checkbox') {
         atualizarItem(indice);
     }
