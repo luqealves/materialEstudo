@@ -14,7 +14,7 @@ html {
 
 body {
     background-color: var(--primary-color);
-    font: bold 2rem 'Open Sans', sans-serif;
+    font-family: 'Segoe UI', sans-serif;
 }
 
 .todo {
@@ -106,4 +106,12 @@ body {
 .todo__new-item > input::placeholder {
     font-style: italic;
     font-weight: normal;
+}
+.todo__text {
+  font-size: 1.2rem;
+  word-break: break-word;
+}
+.todo__text.checked {
+  text-decoration: line-through;
+  color: gray;
 }
